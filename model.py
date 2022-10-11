@@ -114,8 +114,6 @@ class Model:
 
     def solve(self):
         """Solve the problem for each time step"""
-        n_steps = round(self.total_time / self.dt)
-
         for t in self.discrete_time_steps():
             self.step_solve()
 

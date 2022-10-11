@@ -46,7 +46,7 @@ class Mesh:
         :param material: Material to apply in all elements.
         """
 
-        x = 0
+        x = self.x_ini
 
         self.nodes.append(Node(x))
 

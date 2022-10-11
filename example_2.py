@@ -9,7 +9,7 @@ rho = 1  # Material density.
 v0 = 0.1  # Velocity amplitude.
 L = 25  # Mesh length.
 Le = 1  # Element length.
-n = 1  # Vibration mode.
+n = 5  # Vibration mode.
 
 
 def v_ini(x):
@@ -34,7 +34,7 @@ mesh.generate_mesh(material)
 # Create model
 model = Model(mesh=mesh,
               num_particles_per_el=2,
-              total_time=100)
+              total_time=20)
 
 # Initial conditions.
 for p in model.particles:
@@ -58,5 +58,5 @@ model.solve()
 
 # Plot results.
 plot.plot_velocity_result_in_center_of_mass(va)
-plot.plot_position_result_in_center_of_mass()
-plot.animate_solution()
+# plot.plot_position_result_in_center_of_mass()
+# plot.animate_solution()

@@ -34,7 +34,7 @@ mesh.nodes[0].is_fixed = True
 
 # Model plot.
 plot = Plot(model)
-plot.plot_initial_structure()
+# plot.plot_initial_structure()
 
 # Solve model.
 model.solve()
@@ -47,5 +47,5 @@ for i in range(model.number_of_steps()):
 
 # Plot results.
 plot.plot_velocity_result_in_center_of_mass(va)
-plot.plot_position_result_in_center_of_mass()
-plot.animate_solution()
+# plot.plot_position_result_in_center_of_mass()
+# plot.animate_solution()
