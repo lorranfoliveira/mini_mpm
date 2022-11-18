@@ -1,7 +1,6 @@
 from math import fabs
 from particle import Particle
 
-
 class Node:
     x: float
     is_fixed: bool

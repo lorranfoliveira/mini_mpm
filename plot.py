@@ -1,6 +1,7 @@
-from model import Model
 import matplotlib.pyplot as plt
 import numpy as np
+
+from model import Model
 
 
 class Plot:
@@ -64,6 +65,31 @@ class Plot:
         ax.set_ylabel('Velocity')
         ax.set_xlabel('Time (s)')
         ax.set_title('Velocity x Time')
+
+        plt.legend()
+        plt.show()
+
+    def plot_velocity_error(self, va: list[float] | None = None):
+        plt.rc('font', size=12)  # controls default text sizes
+        plt.rc('axes', titlesize=14)  # fontsize of the axes title
+        plt.rc('axes', labelsize=12)  # fontsize of the x and y labels
+        plt.rc('xtick', labelsize=12)  # fontsize of the tick labels
+        plt.rc('ytick', labelsize=12)  # fontsize of the tick labels
+        plt.rc('legend', fontsize=12)  # legend fontsize
+        plt.rc('figure', titlesize=14)  # fontsize of the figure title
+
+        v = self.particles_velocities_in_center_of_mass()
+        va_np = np.array(va)
+        diff_v = np.abs(v - va_np)
+
+        t = self.time_steps()
+
+        fig, ax = plt.subplots()
+
+        ax.plot(t, diff_v, label='Error', color='red')
+        ax.set_ylabel('Velocity error')
+        ax.set_xlabel('Time (s)')
+        ax.set_title('Velocity error x Time')
 
         plt.legend()
         plt.show()
