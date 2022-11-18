@@ -1,4 +1,4 @@
-%% 
+%%
 %% Copyright 2007-2020 Elsevier Ltd
 %% 
 %% This file is part of the 'Elsarticle Bundle'.
@@ -256,7 +256,7 @@
 	After the update of the stress tensor, the background mesh is restored to its initial configuration.
 
 	\section{Results}
-	    Consider the problem proposed by \cite{bardenhagen_energy_2002} which consists of a continuum uniaxial bar of length $L$, fixed at $x=0$ and free at $x=L$, elastic modulus $E$ and density $\rho $. Adopting as initial condition velocities that excite the vibration mode $m$, calculated by (\ref{eq:v_ini}), the velocity of this bar at its center of mass is given by the expression (\ref{eqs:vcm} ).
+	    Consider the problem proposed by \cite{bardenhagen_energy_2002} which consists of a continuum uniaxial bar of length $L$, fixed at $x=0$ and free at $x=L$, elastic modulus $E$ and density $\rho $. Adopting as initial condition velocities that excite the vibration mode $m$, calculated by (\ref{eq:v_ini}), the velocity of this bar at its center of mass is given by the expression (\ref{eqs:vcm}).
 	    
 	    \begin{equation}
 	        v(x,0)=v_0\,\sin(\beta_m\,x)
@@ -288,32 +288,33 @@
         \end{equation}
 
 
-	The Python 3.10.7 programming language was used to develop the solution, available in this \textit{\href{https://github.com/lorranfoliveira/mini_mpm}{github repository}}, to the presented problem. The numerical simulation by MPM was performed with data adopted by \cite{bardenhagen_energy_2002}: $E=100$, $\rho=1$, $L=25$, $v_0=0.1$ and $\Delta t=0.1\frac{L}{c}$. The bar domain was divided into $25$ elements of length $L_e=1$ and $50$ particles were used for discretization of the body (two particles per element). Figure (\ref{fig:domain}) illustrates the initial configuration of the discretized structure.
+	The Python 3.11.0 programming language was used to develop the solution, available in this \textit{\href{https://github.com/lorranfoliveira/mini_mpm}{github repository}}, to the presented problem. The numerical simulation by MPM was performed with data adopted by \cite{bardenhagen_energy_2002}: $E=100$, $\rho=1$, $L=25$, $v_0=0.1$ and $\Delta t=0.1\frac{L}{c}$. The bar domain was divided into $25$ elements of length $L_e=1$ and $50$ particles were used for discretization of the body (two particles per element). Figure (\ref{fig:domain}) illustrates the initial configuration of the discretized structure.
 	
 	\begin{figure}
     	\includegraphics[width=\linewidth]{exemplo_dominio.png}
-    	\caption{Bar discretization.}
+    	\caption{Initial structure discretization. The structure is discretized into 50 uniformly distributed particles (2 particles per element). All particles are free to move only in the direction of the principal axis. Yellow dots represent particles, black dots represent free nodes, and red dots represent fixed nodes.}
     	\centering
     	\label{fig:domain}
     \end{figure}
     
-    The Figure (\ref{fig:result1}) shows the evolution bar velocity in its center of mass over time for the vibration mode $m=1$. The results obtained by the implementation made are compatible whith the analytical solution (\ref{eqs:vcm}). In Figure (\ref{fig:result2}), considering $m=5$, note that there is a dissipation in the energy that makes the analytical solution different from the numerical one. However, this damped vibration is expected and it is caused by the use of USL. These results, including the dumped one, are compatible with the literature \cite{bardenhagen_energy_2002}.
-	
-	\begin{figure}
-    	\includegraphics[width=10cm]{exemplo_1_resultado.png}
+    \begin{figure}
+    	\includegraphics[width=10cm]{results.png}
     	\centering
-    	\caption{Vibration mode 1 - Velocity of the mass center of the bar.}
-    	\label{fig:result1}
+    	\caption{Vibration mode 1: The continuum black line represents the analytical solution obtained by the expression (\ref{eqs:vcm}) and describes the velocity of the bar's center of mass as a function of time. The yellow dots represent the discrete solutions obtained by the implemented MPM.}
+    	\label{fig:results}
     \end{figure}
     
     \begin{figure}
-    	\includegraphics[width=10cm]{exemplo_1_resultado_modo5.png}
+    	\includegraphics[width=10cm]{error.png}
     	\centering
-    	\caption{Vibration mode 5 - Velocity of the mass center of the bar.}
-    	\label{fig:result2}
+    	\caption{Numerical error: The error was calculated as the modulus of the difference between the numerical and analytical solutions. Because of the use of the USL as a solution strategy, the system naturally dissipates energy, as can be seen in the two graphs.}
+    	\label{fig:error}
     \end{figure}
     
-
+    The Figure (\ref{fig:results}) shows the evolution bar velocity in its center of mass over time for the vibration modes $m=1$ and $m=5$. The results obtained by the implementation made are compatible whith the analytical solution (\ref{eqs:vcm}). For $m=5$, note that there is a dissipation in the energy that makes the analytical solution different from the numerical one. However, this damped vibration is expected and it is caused by the use of USL. These results, including the dumped one, are compatible with the literature \cite{bardenhagen_energy_2002}.
+    
+    Figure (\ref{fig:error}) shows the error of the numerical solution implemented in relation to the analytical expression (\ref{eqs:vcm}). Note that the energy dissipation resulting from the application of the USL is perceived by the increase in the error with time, both for mode 1 and for mode 5. However, in mode 5 a larger periodic oscillation in the error is noticeable, and this occurs due to to the fact that the numerical solution goes out of phase for this case, therefore increasing the error for short periods of time. However, in general, there is an increase in error as a function of time for the two analyzed vibration modes.
+	
 	\section{Conclusion}
 	An introductory study to MPM was carried out with the development of an educational code to solve the problem of free vibration of a uniaxial bar. The solution found by MPM, implemented with the USL update strategy, proved to be compatible with the known analytical solution when $m=1$. For $m=5$, a damping effect appears in the system, in addition to an out-of-phase vibration. However, such behaviors are expected and compatible with numerical solutions
     found in the literature.
